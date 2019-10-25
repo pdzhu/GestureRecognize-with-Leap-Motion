@@ -1,1 +1,1 @@
-# GestureRecognize-with-Leap-Motion-
+# GestureRecognize-with-Leap-Motion
