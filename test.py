@@ -18,7 +18,6 @@ class SimpleListener(Leap.Listener):
         print "Disconnected"
 
     def on_frame(self, controller):
-
         frame = controller.frame()
         leftHand = frame.hand(0)
         rightHand = frame.hand(0)   # 赋初值   能否
@@ -107,9 +106,6 @@ class SimpleListener(Leap.Listener):
         data[48].append(rightHand.fingers[4].joint_position(3)[1])
         data[49].append(rightHand.fingers[4].joint_position(3)[2])
         data[50].append(2)
-
-
-
 
 
 def main():
