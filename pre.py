@@ -151,7 +151,7 @@ def main():
     df_right = pd.DataFrame(data=data)
     df_right = df_right.transpose()
     ls = [num for num in range(0, len(df_right), 3)]
-    df_right = df_right.transpose()[ls].transpose()    # 隔3帧提取一次    可考虑换eval函数
+    df_right = df_right.loc[ls]
     print len(df_right)
     a = len(df_right)
     for n in range(a, 150):  # 插入一行
