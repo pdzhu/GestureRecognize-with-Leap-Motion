@@ -3,8 +3,8 @@ import sys
 import Leap
 import time
 import pandas as pd
-sys.path.insert(0, "../lib")
-sys.path.insert(0, "../lib/x64")
+sys.path.insert(0, "./lib")
+sys.path.insert(0, "./lib/x64")
 
 leftHand = []
 rightHand = []
@@ -52,7 +52,7 @@ class SimpleListener(Leap.Listener):
                     time.sleep(0.5)
                     frame = controller.frame()
                     left_hand = frame.hands[0]
-                    current_time = frame.timestamp            # timestamp 毫秒数
+                    current_time = frame.timestamp            # timestamp 微秒数
                     time_delta = current_time - previous_time
 
                     data_left = [[] for _ in range(12)]   # [[], [], [], [], [], [], [], [], [], [], [], []]
@@ -152,13 +152,13 @@ def main():
     controller = Leap.Controller()
     controller.add_listener(listener)
     # Run infinitely until Enter is pressed
-    print "Hit Enter to quit!"
-    try:
-        sys.stdin.readline()
-    except KeyboardInterrupt:
-        pass
-    finally:
-        controller.remove_listener(listener)
+    # print "Hit Enter to quit!"
+    # try:
+    #     sys.stdin.readline()
+    # except KeyboardInterrupt:
+    #     pass
+    # finally:
+    #     controller.remove_listener(listener)
 
 
 if __name__ == "__main__":
