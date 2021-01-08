@@ -21,7 +21,7 @@ model = load_model('model_test1.h5')
 print "Model Loaded"
 
 gesture = ["Swipe Right", "Swipe Left"]
-audio = ["aplay right.wav", "aplay left.wav"]
+audio = ["aplay 3.wav", "aplay 4.wav", "aplay 5.wav", "aplay 6.wav"]
 
 graph = tf.get_default_graph()
 
@@ -130,7 +130,7 @@ def main():
     # Create a sample listener and controller
     listener = SimpleListener()
     controller = Leap.Controller()
-    print "Press Enter to quit..."
+    print "Press Enter to start..."
 
     try:
         sys.stdin.readline()
@@ -157,7 +157,7 @@ def main():
     for n in range(a, 150):  # 插入一行
         df_right.loc[n * 3] = df_right.loc[a * 3 - 3]     # 运算速度还不够快
 
-    x = df_right.iloc[:, 1:49].values
+    x = df_right.iloc[:, 1:50].values
     with graph.as_default():
         y_pred = model.predict(np.reshape(x, (1, x.shape[0], x.shape[1])))
     pred = np.argmax(y_pred)
@@ -165,7 +165,7 @@ def main():
     print y_pred
     print pred
     # if (y_pred[0][0] or y_pred[0][1]) >= 0.2:
-    if y_pred[0][0] >= 0.5 or y_pred[0][1] >= 0.5:
+    if y_pred[0][pred] >= 0.5:
         os.system(audio[pred])
     print y_pred[0][1]
 
