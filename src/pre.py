@@ -9,19 +9,20 @@ import os
 import time
 import sys
 
-sys.path.insert(0, "../lib")
-sys.path.insert(0, "../lib/x64")
 
 data = [[] for _ in range(50)]  # 12这个数字可以改,表示有几个参数
 init_time = time.time()
 previous_time = 0
 
 # Load the model
-model = load_model('model_test1.h5')
+model = load_model('/home/pdzhu/GestureRecognitionSourceFiles/src/model/model_test.h5')
 print "Model Loaded"
 
 gesture = ["Swipe Right", "Swipe Left"]
-audio = ["aplay 3.wav", "aplay 4.wav", "aplay 5.wav", "aplay 6.wav"]
+audio = ["aplay /home/pdzhu/GestureRecognitionSourceFiles/resource/3.wav",
+         "aplay /home/pdzhu/GestureRecognitionSourceFiles/resource/4.wav",
+         "aplay /home/pdzhu/GestureRecognitionSourceFiles/resource/5.wav",
+         "aplay /home/pdzhu/GestureRecognitionSourceFiles/resource/6.wav"]
 
 graph = tf.get_default_graph()
 
@@ -151,7 +152,7 @@ def main():
     df_right = pd.DataFrame(data=data)
     df_right = df_right.transpose()
     ls = [num for num in range(0, len(df_right), 3)]
-    df_right = df_right.transpose()[ls].transpose()    # 隔3帧提取一次    可考虑换eval函数
+    df_right = df_right.loc()[ls]                  # 隔3帧提取一次    可考虑换eval函数
     print len(df_right)
     a = len(df_right)
     for n in range(a, 150):  # 插入一行

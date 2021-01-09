@@ -139,4 +139,4 @@ if __name__ == "__main__":
 
     df = pd.DataFrame(data=data)
     df = df.transpose()
-    df.to_csv("./CSV_2/%s.csv" % (str(200)), sep=',', index=False, header=False)
+    df.to_csv("../temp/%s.csv" % (str(201)), sep=',', index=False, header=False)
