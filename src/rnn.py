@@ -48,7 +48,7 @@ print y
 X_train, X_test, y_train, y_test = train_test_split(x, y, test_size=0.2)   # 训练集和测试集的分割
 
 # Construct the model
-n_neurons = 9
+n_neurons = 15
 start_time = time.time()
 model = Sequential()
 model.add(LSTM(n_neurons, input_shape=(X_train.shape[1], X_train.shape[2])))
@@ -63,7 +63,7 @@ model.fit(X_train, y_train, epochs=20, batch_size=15)
 print "%s Minutes of Execution" % str((time.time()-start_time)/60)
 
 # Save the model for prediction
-model.save('model_test2.h5')
+model.save('/home/pdzhu/GestureRecognitionSourceFiles/model/model_test3.h5')
 print "Model Saved"
 print model.summary()
 
