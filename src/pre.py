@@ -15,7 +15,7 @@ init_time = time.time()
 previous_time = 0
 
 # Load the model
-model = load_model('/home/pdzhu/GestureRecognitionSourceFiles/src/model/model_test.h5')
+model = load_model('/home/pdzhu/GestureRecognitionSourceFiles/model/model_test2.h5')
 print "Model Loaded"
 
 gesture = ["Swipe Right", "Swipe Left"]
@@ -168,7 +168,7 @@ def main():
     print y_pred
     print pred
     # if (y_pred[0][0] or y_pred[0][1]) >= 0.2:
-    if y_pred[0][pred] >= 0.5:
+    if y_pred[0][pred] >= 0.3:
         os.system(audio[pred])
     print y_pred[0][1]
 

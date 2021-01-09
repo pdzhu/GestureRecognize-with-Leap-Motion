@@ -146,6 +146,6 @@ if __name__ == "__main__":
     df.to_csv("./CSV_1/%s.csv" % (str(200)), sep=',', index=False, header=False)
 
 # path_file_number=glob.glob('D:/case/test/testcase/checkdata/*.py')#或者指定文件下个数
-    path_file_number=len(glob.glob(pathname='/Users/lujie/Desktop/GestureRecognize-with-Leap-Motion /CSV_1/*.csv'))#获取当前文件夹下个数
+    path_file_number = len(glob.glob(pathname='/Users/lujie/Desktop/GestureRecognize-with-Leap-Motion /CSV_1/*.csv'))#获取当前文件夹下个数
     print path_file_number
 
