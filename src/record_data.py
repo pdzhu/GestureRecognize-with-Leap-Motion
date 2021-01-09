@@ -140,12 +140,12 @@ if __name__ == "__main__":
 
     df = pd.DataFrame(data=data)
     df = df.transpose()
-<<<<<<< HEAD:src/record_data.py
+
     df.to_csv("../temp/%s.csv" % (str(201)), sep=',', index=False, header=False)
-=======
+
     df.to_csv("./CSV_1/%s.csv" % (str(200)), sep=',', index=False, header=False)
 
 # path_file_number=glob.glob('D:/case/test/testcase/checkdata/*.py')#或者指定文件下个数
     path_file_number=len(glob.glob(pathname='/Users/lujie/Desktop/GestureRecognize-with-Leap-Motion /CSV_1/*.csv'))#获取当前文件夹下个数
     print path_file_number
->>>>>>> 1203aaf46a3933fca69d63fa29e271f3d460a0e6:record_data.py
+
