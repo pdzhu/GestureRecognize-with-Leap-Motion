@@ -152,7 +152,11 @@ def main():
     df_right = pd.DataFrame(data=data)
     df_right = df_right.transpose()
     ls = [num for num in range(0, len(df_right), 3)]
+<<<<<<< HEAD:src/pre.py
     df_right = df_right.loc()[ls]                  # 隔3帧提取一次    可考虑换eval函数
+=======
+    df_right = df_right.loc[ls]
+>>>>>>> 1203aaf46a3933fca69d63fa29e271f3d460a0e6:pre.py
     print len(df_right)
     a = len(df_right)
     for n in range(a, 150):  # 插入一行
