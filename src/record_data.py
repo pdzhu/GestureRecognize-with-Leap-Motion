@@ -44,7 +44,6 @@ class SimpleListener(Leap.Listener):
         data[7].append(leftHand.palm_position[2])
 
         #  手掌速度  x y z
-        #  palm_width   手掌宽度  后期可考虑去除手掌大小影响
         data[8].append(leftHand.palm_velocity[0])
         data[9].append(leftHand.palm_velocity[1])
         data[10].append(leftHand.palm_velocity[2])
@@ -91,7 +90,6 @@ class SimpleListener(Leap.Listener):
         data[36].append(rightHand.palm_position[2])
 
         #  手掌速度  x y z
-        #  palm_width   手掌宽度  后期可考虑去除手掌大小影响
         data[37].append(rightHand.palm_velocity[0])
         data[38].append(rightHand.palm_velocity[1])
         data[39].append(rightHand.palm_velocity[2])

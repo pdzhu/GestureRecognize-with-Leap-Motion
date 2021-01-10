@@ -143,6 +143,7 @@ class SimpleListener(Leap.Listener):
         data[58].append(rightHand.stabilized_palm_position[1])
         data[59].append(rightHand.stabilized_palm_position[2])
 
+
 def main():
     # Create a sample listener and controller
     listener = SimpleListener()
