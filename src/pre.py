@@ -2,7 +2,6 @@
 import numpy as np
 import pandas as pd
 from keras.models import load_model
-from keras.utils import np_utils
 import Leap
 import tensorflow as tf
 import os
@@ -10,12 +9,12 @@ import time
 import sys
 
 
-data = [[] for _ in range(50)]  # 12这个数字可以改,表示有几个参数
+data = [[] for _ in range(60)]  # 12这个数字可以改,表示有几个参数
 init_time = time.time()
 previous_time = 0
 
 # Load the model
-model = load_model('/home/pdzhu/GestureRecognitionSourceFiles/model/model_test2.h5')
+model = load_model('/home/pdzhu/GestureRecognitionSourceFiles/model/model_test3.h5')
 print "Model Loaded"
 
 gesture = ["Swipe Right", "Swipe Left"]
@@ -89,43 +88,60 @@ class SimpleListener(Leap.Listener):
         data[24].append(leftHand.fingers[4].joint_position(3)[1])
         data[25].append(leftHand.fingers[4].joint_position(3)[2])
 
-        data[26].append(rightHand.palm_normal.yaw * Leap.RAD_TO_DEG)
-        data[27].append(rightHand.palm_normal.pitch * Leap.RAD_TO_DEG)
-        data[28].append(rightHand.palm_normal.roll * Leap.RAD_TO_DEG)
+        data[26].append(leftHand.palm_width)
+
+        data[27].append(leftHand.sphere_radius)
+
+        data[28].append(leftHand.stabilized_palm_position[0])
+        data[29].append(leftHand.stabilized_palm_position[1])
+        data[30].append(leftHand.stabilized_palm_position[2])
+
+        #
+        # 右手
+        data[31].append(rightHand.palm_normal.yaw * Leap.RAD_TO_DEG)
+        data[32].append(rightHand.palm_normal.pitch * Leap.RAD_TO_DEG)
+        data[33].append(rightHand.palm_normal.roll * Leap.RAD_TO_DEG)
 
         #
         #  手掌位置  x  y  z   可考虑stabilized_palm_position
-        data[29].append(rightHand.palm_position[0])
-        data[30].append(rightHand.palm_position[1])
-        data[31].append(rightHand.palm_position[2])
+        data[34].append(rightHand.palm_position[0])
+        data[35].append(rightHand.palm_position[1])
+        data[36].append(rightHand.palm_position[2])
 
         #  手掌速度  x y z
         #  palm_width   手掌宽度  后期可考虑去除手掌大小影响
-        data[32].append(rightHand.palm_velocity[0])
-        data[33].append(rightHand.palm_velocity[1])
-        data[34].append(rightHand.palm_velocity[2])
+        data[37].append(rightHand.palm_velocity[0])
+        data[38].append(rightHand.palm_velocity[1])
+        data[39].append(rightHand.palm_velocity[2])
 
         # 指尖位置  x y z
-        data[35].append(rightHand.fingers[0].joint_position(3)[0])
-        data[36].append(rightHand.fingers[0].joint_position(3)[1])
-        data[37].append(rightHand.fingers[0].joint_position(3)[2])
+        data[40].append(rightHand.fingers[0].joint_position(3)[0])
+        data[41].append(rightHand.fingers[0].joint_position(3)[1])
+        data[42].append(rightHand.fingers[0].joint_position(3)[2])
 
-        data[38].append(rightHand.fingers[1].joint_position(3)[0])
-        data[39].append(rightHand.fingers[1].joint_position(3)[1])
-        data[40].append(rightHand.fingers[1].joint_position(3)[2])
+        data[43].append(rightHand.fingers[1].joint_position(3)[0])
+        data[44].append(rightHand.fingers[1].joint_position(3)[1])
+        data[45].append(rightHand.fingers[1].joint_position(3)[2])
 
-        data[41].append(rightHand.fingers[2].joint_position(3)[0])
-        data[42].append(rightHand.fingers[2].joint_position(3)[1])
-        data[43].append(rightHand.fingers[2].joint_position(3)[2])
+        data[46].append(rightHand.fingers[2].joint_position(3)[0])
+        data[47].append(rightHand.fingers[2].joint_position(3)[1])
+        data[48].append(rightHand.fingers[2].joint_position(3)[2])
 
-        data[44].append(rightHand.fingers[3].joint_position(3)[0])
-        data[45].append(rightHand.fingers[3].joint_position(3)[1])
-        data[46].append(rightHand.fingers[3].joint_position(3)[2])
+        data[49].append(rightHand.fingers[3].joint_position(3)[0])
+        data[50].append(rightHand.fingers[3].joint_position(3)[1])
+        data[51].append(rightHand.fingers[3].joint_position(3)[2])
 
-        data[47].append(rightHand.fingers[4].joint_position(3)[0])
-        data[48].append(rightHand.fingers[4].joint_position(3)[1])
-        data[49].append(rightHand.fingers[4].joint_position(3)[2])
+        data[52].append(rightHand.fingers[4].joint_position(3)[0])
+        data[53].append(rightHand.fingers[4].joint_position(3)[1])
+        data[54].append(rightHand.fingers[4].joint_position(3)[2])
 
+        data[55].append(rightHand.palm_width)
+
+        data[56].append(rightHand.sphere_radius)
+
+        data[57].append(rightHand.stabilized_palm_position[0])
+        data[58].append(rightHand.stabilized_palm_position[1])
+        data[59].append(rightHand.stabilized_palm_position[2])
 
 def main():
     # Create a sample listener and controller

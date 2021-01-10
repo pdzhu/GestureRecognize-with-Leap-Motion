@@ -2,7 +2,7 @@
 import numpy as np
 import pandas as pd
 from keras.models import Sequential
-from keras.layers import Dense
+from keras.layers import Dense, SpatialDropout1D, MaxPooling1D, Conv1D
 from keras.layers import LSTM
 from keras.utils import np_utils
 import time
@@ -51,9 +51,21 @@ X_train, X_test, y_train, y_test = train_test_split(x, y, test_size=0.2)   # 训
 n_neurons = 15
 start_time = time.time()
 model = Sequential()
-model.add(LSTM(n_neurons, input_shape=(X_train.shape[1], X_train.shape[2])))
-model.add(Dense(output_dim=4, init='uniform', activation='sigmoid'))
-model.compile(loss='categorical_crossentropy', optimizer='adam', metrics=['accuracy'])
+
+
+# model.add(LSTM(n_neurons, input_shape=(X_train.shape[1], X_train.shape[2])))
+# model.add(Dense(output_dim=4, init='uniform', activation='sigmoid'))
+# model.compile(loss='categorical_crossentropy', optimizer='adam', metrics=['accuracy'])
+
+# model.add(Embedding(top_words,embedding_vector_length,input_length=max_review_length))
+model.add(SpatialDropout1D(0.3))
+model.add(Conv1D(activation="relu", padding="same", filters=64, kernel_size=5))
+model.add(MaxPooling1D(pool_size=4))
+model.add(LSTM(100, dropout=0.2, recurrent_dropout=0.2, input_shape=(X_train.shape[1], X_train.shape[2])))
+model.add(Dense(4, activation='sigmoid'))
+model.compile(loss='binary_crossentropy', optimizer='adam', metrics=['accuracy'])
+
+
 # print X_train.shape[1]
 # print X_train.shape[2]
 # Train the model
