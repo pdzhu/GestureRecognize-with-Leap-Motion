@@ -123,7 +123,7 @@ class SimpleListener(Leap.Listener):
         data[58].append(rightHand.stabilized_palm_position[1])
         data[59].append(rightHand.stabilized_palm_position[2])
 
-        data[60].append(2)   # 结果
+        data[60].append(6)   # 结果
 
 
 def main():
@@ -158,7 +158,8 @@ if __name__ == "__main__":
 
     # df.to_csv("../temp/%s.csv" % (str(1)), sep=',', index=False, header=False)
     # 获取当前文件夹下个数
-    path_file_number = len(glob.glob(pathname='/home/pdzhu/GestureRecognitionSourceFiles/temp/*.csv'))
-    print path_file_number
-    df.to_csv("../temp/%s.csv" % (str(path_file_number + 1)), sep=',', index=False, header=False)
+    # path_file_number = len(glob.glob(pathname='/home/pdzhu/GestureRecognitionSourceFiles/data/7/*.csv'))
+    # print path_file_number
+    # df.to_csv("/home/pdzhu/GestureRecognitionSourceFiles/data/7/%s.csv" % (str(path_file_number + 1)), sep=',', index=False, header=False)
+    df.to_csv("/home/pdzhu/GestureRecognitionSourceFiles/data/6/%s.csv" % (str(54)), sep=',', index=False, header=False)
 

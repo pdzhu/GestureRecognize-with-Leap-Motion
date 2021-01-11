@@ -101,11 +101,17 @@ def feature_l(ds, da):
             col += 1
 
 
+def feature_res(ds, da):
+    col = da.shape[1]
+    da[col] = ds[60]
+
+
 if __name__ == "__main__":
     dataset = pd.read_csv("/home/pdzhu/GestureRecognitionSourceFiles/temp/2.csv", header=None)
 
+    #  s d v p l
     data = pd.DataFrame()
-    feature_p(dataset, data)
-    feature_l(dataset, data)
-
+    # feature_p(dataset, data)
+    # feature_l(dataset, data)
+    feature_res(dataset, data)
     data.to_csv("3.csv", sep=',', index=False, header=False)

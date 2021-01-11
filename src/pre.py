@@ -7,14 +7,14 @@ import tensorflow as tf
 import os
 import time
 import sys
-
+import feature as fe
 
 data = [[] for _ in range(60)]  # 12这个数字可以改,表示有几个参数
 init_time = time.time()
 previous_time = 0
 
 # Load the model
-model = load_model('/home/pdzhu/GestureRecognitionSourceFiles/model/model_test3.h5')
+model = load_model('/home/pdzhu/GestureRecognitionSourceFiles/model/model_test100.h5')
 print "Model Loaded"
 
 gesture = ["Swipe Right", "Swipe Left"]
@@ -166,28 +166,40 @@ def main():
     finally:
         # Remove the sample listener when done
         controller.remove_listener(listener)
+
     df_right = pd.DataFrame(data=data)
     df_right = df_right.transpose()
     ls = [num for num in range(0, len(df_right), 3)]
+    df_right = df_right.loc[ls]                  # 隔3帧提取一次    可考虑换eval函数
 
-    df_right = df_right.loc()[ls]                  # 隔3帧提取一次    可考虑换eval函数
+    data_1 = pd.DataFrame()
+    fe.feature_s(df_right, data_1)
+    fe.feature_d(df_right, data_1)
+    fe.feature_v(df_right, data_1)
+    fe.feature_p(df_right, data_1)
+    fe.feature_l(df_right, data_1)
 
-    print len(df_right)
-    a = len(df_right)
+    print len(data_1)
+    a = len(data_1)
+
     for n in range(a, 150):  # 插入一行
-        df_right.loc[n * 3] = df_right.loc[a * 3 - 3]     # 运算速度还不够快
+        data_1.loc[n * 3] = data_1.loc[a * 3 - 3]     # 运算速度还不够快
 
-    x = df_right.iloc[:, 1:50].values
+    x = data_1.iloc[:, 1:44].values
+
     with graph.as_default():
         y_pred = model.predict(np.reshape(x, (1, x.shape[0], x.shape[1])))
     pred = np.argmax(y_pred)
-    # Eliminate the False Postives
+
+    # Eliminate the False Positives
     print y_pred
-    print pred
+    print pred + 2
     # if (y_pred[0][0] or y_pred[0][1]) >= 0.2:
-    if y_pred[0][pred] >= 0.3:
-        os.system(audio[pred])
-    print y_pred[0][1]
+
+    # if y_pred[0][pred] >= 0.3:
+    #     os.system(audio[pred])
+
+    data_1.to_csv("./5.csv", header=None)
 
 
 if __name__ == "__main__":
